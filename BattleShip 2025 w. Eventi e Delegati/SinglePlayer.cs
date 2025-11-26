@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BattleShip_2025_w._Eventi_e_Delegati
 {
@@ -30,6 +31,8 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
 
         public delegate void CellaCliccataHandler(int r, int c);
         public event CellaCliccataHandler OnCellaCliccata;
+
+        bool partitaFinita = false;
 
         public SinglePlayer()
         {
@@ -81,8 +84,8 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
             flotta.Add(new Nave(2));
             flotta.Add(new Nave(1)); // 1 nave da 1
 
-            // Se vuoi verificare
-            MessageBox.Show("Flotta creata: " + flotta.Count + " navi");
+            // degbug
+            //MessageBox.Show("Flotta creata: " + flotta.Count + " navi");
         }
 
         //funzioncina per aggiungere testo nel listbox
@@ -190,8 +193,11 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
 
             if (naveCorrente < flotta.Count)
                 Log($"Posiziona la nave da {flotta[naveCorrente].Lunghezza} celle.");
-            else
+            else {
                 Log("Tutte le navi posizionate! Inizia il gioco.");
+                ResetGridColors();
+            }
+            
         }
 
         // nel casso cella non valida
@@ -201,6 +207,18 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
                 bottoni[p.r, p.c].BackColor = Color.FromArgb(0, 192, 192);
 
             posTemp.Clear();
+        }
+
+        // reset griglia dei colori
+        private void ResetGridColors()
+        {
+            for (int r = 0; r < 10; r++)
+            {
+                for (int c = 0; c < 10; c++)
+                {
+                    bottoni[r, c].BackColor = Color.FromArgb(0, 192, 192);
+                }
+            }
         }
 
 
@@ -224,6 +242,11 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
                 bottoni[r, c].BackColor = Color.Red;
 
                 Log($"Colpito in posizione ({r},{c})");
+                //ho dovuto fare così perchè i due file wav me li prendeva come array di byte invece di file Stream
+                byte[] soundData = Properties.Resources.falling_rock;
+                MemoryStream ms = new MemoryStream(soundData);
+                SoundPlayer sp = new SoundPlayer(ms);
+                sp.Play();
 
                 // controllo se una nave è affondata
                 foreach (var nave in flotta)
@@ -249,6 +272,18 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
                         naviNonAffondate--;
                         lblNavi.Text = naviNonAffondate.ToString();
                         Log("Nave affondata!");
+
+                        //vittoria
+                        if (naviNonAffondate == 0)
+                        {
+                            MessageBox.Show($"Hai vinto! Hai impiegato {mosse} mosse!",
+                                            "Vittoria!",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Information);
+
+                            partitaFinita = true;   // non chiudo qui ma dopo, altrimenti crsasha
+                        }
+
                         break;
                     }
                 }
@@ -259,6 +294,18 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
                 // robo dell'acqua
                 bottoni[r, c].BackColor = Color.Blue;
                 Log($"Acqua!! ({r},{c})");
+                //ho dovuto fare così perchè i due file wav me li prendeva come array di byte invece di file Stream
+                byte[] soundData = Properties.Resources.water_splash;
+                MemoryStream ms = new MemoryStream(soundData);
+                SoundPlayer sp = new SoundPlayer(ms);
+                sp.Play();
+            }
+
+            //fine game
+            if (partitaFinita)
+            {
+                this.Close();
+                return;
             }
         }
 

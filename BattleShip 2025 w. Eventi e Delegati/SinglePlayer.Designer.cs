@@ -117,9 +117,9 @@
             lblNavi.AutoSize = true;
             lblNavi.Location = new Point(679, 244);
             lblNavi.Name = "lblNavi";
-            lblNavi.Size = new Size(38, 15);
+            lblNavi.Size = new Size(13, 15);
             lblNavi.TabIndex = 5;
-            lblNavi.Text = "label1";
+            lblNavi.Text = "6";
             // 
             // SinglePlayer
             // 

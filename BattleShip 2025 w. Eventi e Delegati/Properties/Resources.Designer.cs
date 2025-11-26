@@ -69,5 +69,25 @@ namespace BattleShip_2025_w._Eventi_e_Delegati.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
+        internal static byte[] falling_rock {
+            get {
+                object obj = ResourceManager.GetObject("falling rock", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
+        internal static byte[] water_splash {
+            get {
+                object obj = ResourceManager.GetObject("water splash", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
