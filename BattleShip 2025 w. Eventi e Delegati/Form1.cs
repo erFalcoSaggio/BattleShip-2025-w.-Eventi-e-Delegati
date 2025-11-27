@@ -12,5 +12,11 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
             SinglePlayer sp = new SinglePlayer();
             sp.ShowDialog();
         }
+
+        private void btn_MultiPlayer_Click(object sender, EventArgs e)
+        {
+            MultiPlayer mp = new MultiPlayer();
+            mp.ShowDialog();
+        }
     }
 }

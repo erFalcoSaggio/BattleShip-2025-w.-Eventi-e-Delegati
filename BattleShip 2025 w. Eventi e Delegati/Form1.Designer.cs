@@ -46,7 +46,7 @@
             // 
             // btn_SinglePlayer
             // 
-            btn_SinglePlayer.Font = new Font("Reem Kufi", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_SinglePlayer.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold, GraphicsUnit.Point);
             btn_SinglePlayer.ImageAlign = ContentAlignment.MiddleLeft;
             btn_SinglePlayer.Location = new Point(274, 215);
             btn_SinglePlayer.Name = "btn_SinglePlayer";
@@ -58,7 +58,7 @@
             // 
             // btn_MultiPlayer
             // 
-            btn_MultiPlayer.Font = new Font("Reem Kufi", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_MultiPlayer.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold, GraphicsUnit.Point);
             btn_MultiPlayer.ImageAlign = ContentAlignment.MiddleLeft;
             btn_MultiPlayer.Location = new Point(274, 294);
             btn_MultiPlayer.Name = "btn_MultiPlayer";
@@ -67,6 +67,7 @@
             btn_MultiPlayer.Text = "🗣👤 | Multi Player";
             btn_MultiPlayer.TextAlign = ContentAlignment.MiddleLeft;
             btn_MultiPlayer.UseVisualStyleBackColor = true;
+            btn_MultiPlayer.Click += btn_MultiPlayer_Click;
             // 
             // lbl_Copy
             // 

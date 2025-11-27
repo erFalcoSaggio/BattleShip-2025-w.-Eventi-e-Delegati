@@ -92,6 +92,7 @@ namespace BattleShip_2025_w._Eventi_e_Delegati
         private void Log(string testo)
         {
             lstLog.Items.Add(testo);
+            lstLog.TopIndex = lstLog.Items.Count - 1; //autoscrolla
         }
 
         //fondamentale zio cane
